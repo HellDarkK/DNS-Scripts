@@ -6,6 +6,7 @@ name: Create PowerDNS Recursor Image
 # documentation.
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
   push:
