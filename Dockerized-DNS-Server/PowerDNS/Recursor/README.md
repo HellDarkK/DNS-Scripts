@@ -37,4 +37,20 @@ Modify `powerdns/recursor.conf` to customize your PowerDNS Recursor setup. Ensur
   ```sh
   docker logs -f <container_name>
   ```
-
+- To enable IPv6 support, add the following example to `/etc/docker/daemon.json`:
+  ```json
+  {
+    "ipv6": true,
+    "fixed-cidr-v6": "fd7e:1768:1379::/64",
+    "default-address-pools": [
+      { "base": "172.17.0.0/16", "size": 16 },
+      { "base": "172.18.0.0/16", "size": 16 },
+      { "base": "172.19.0.0/16", "size": 16 },
+      { "base": "172.20.0.0/14", "size": 16 },
+      { "base": "172.24.0.0/14", "size": 16 },
+      { "base": "172.28.0.0/14", "size": 16 },
+      { "base": "192.168.0.0/16", "size": 20 },
+      { "base": "fd7e:1768:1379::/48", "size": 64 }
+    ]
+  }
+  ```
