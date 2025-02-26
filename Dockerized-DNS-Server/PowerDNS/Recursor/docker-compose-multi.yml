@@ -1,0 +1,64 @@
+name: pdns-recursor
+
+services:
+  recurse-1:
+    restart: unless-stopped
+    image: local/pdns-recursor
+    ports:
+      - '<ip-address>:53:53/tcp' # plain dns over tcp v4
+      - '<ip-address>:53:53/udp' # plain dns over udp v4
+      - '[<ipv6-address>]:53:53/tcp' # plain dns over tcp v4
+      - '[<ipv6-address>]:53:53/udp' # plain dns over udp v4
+      - '<ip-address>:8083:8083/tcp' #Web Stats
+    sysctls:
+      - net.ipv6.route.max_size=16384
+    volumes:
+      - ./powerdns/recursor.conf:/etc/powerdns/recursor.conf
+
+  recurse-2:
+    restart: unless-stopped
+    image: local/pdns-recursor
+    ports:
+      - '<ip-address>:54:53/tcp' # plain dns over tcp v4
+      - '<ip-address>:54:53/udp' # plain dns over udp v4
+      - '[<ipv6-address>]:54:53/tcp' # plain dns over tcp v4
+      - '[<ipv6-address>]:54:53/udp' # plain dns over udp v4
+      - '<ip-address>:8084:8083/tcp' #Web Stats
+    sysctls:
+      - net.ipv6.route.max_size=16384
+    volumes:
+      - ./powerdns/recursor.conf:/etc/powerdns/recursor.conf
+
+  recurse-3:
+    restart: unless-stopped
+    image: local/pdns-recursor
+    ports:
+      - '<ip-address>:55:53/tcp' # plain dns over tcp v4
+      - '<ip-address>:55:53/udp' # plain dns over udp v4
+      - '[<ipv6-address>]:55:53/tcp' # plain dns over tcp v4
+      - '[<ipv6-address>]:55:53/udp' # plain dns over udp v4
+      - '<ip-address>:8085:8083/tcp' #Web Stats
+    sysctls:
+      - net.ipv6.route.max_size=16384
+    volumes:
+      - ./powerdns/recursor.conf:/etc/powerdns/recursor.conf
+
+  recurse-4:
+    restart: unless-stopped
+    image: local/pdns-recursor
+    ports:
+      - '<ip-address>:56:53/tcp' # plain dns over tcp v4
+      - '<ip-address>:56:53/udp' # plain dns over udp v4
+      - '[<ipv6-address>]:56:53/tcp' # plain dns over tcp v4
+      - '[<ipv6-address>]:56:53/udp' # plain dns over udp v4
+      - '<ip-address>:8086:8083/tcp' #Web Stats
+    sysctls:
+      - net.ipv6.route.max_size=16384
+    volumes:
+      - ./powerdns/recursor.conf:/etc/powerdns/recursor.conf
+
+networks:
+  default:
+    enable_ipv6: true
+    ipam:
+      driver: default
