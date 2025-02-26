@@ -1,4 +1,4 @@
-# PowerDNS Recursor in Docker
+# Running PowerDNS Recursor in Docker
 
 These are the files required to run PowerDNS Recursor in a Docker container. It includes configurations for both single-instance and multi-instance deployments.
 
