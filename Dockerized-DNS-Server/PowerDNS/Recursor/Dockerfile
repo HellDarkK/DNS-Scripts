@@ -15,7 +15,7 @@ RUN echo "Package: rec*" > /etc/apt/preferences.d/rec-master && \
     echo "Pin-Priority: 600" >> /etc/apt/preferences.d/rec-master
 
 # Add APT Keyring file
-RUN install -d /etc/apt/keyrings && curl https://repo.powerdns.com/FD380FBB-pub.asc | sudo tee /etc/apt/keyrings/rec-master-pub.asc
+RUN install -d /etc/apt/keyrings && curl https://repo.powerdns.com/CBC8B383-pub.asc | sudo tee /etc/apt/keyrings/rec-master-pub.asc
 
 # Install PowerDNS Authoritative Server
 RUN apt-get update && apt-get install -y pdns-recursor
