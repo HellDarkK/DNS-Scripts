@@ -5,8 +5,7 @@ These are the files required to run PowerDNS Recursor in a Docker container. It 
 ## Files Overview
 
 - **Dockerfile**: For Building the PowerDNS Recursor container.
-- **docker-compose-single.yaml**: Docker Compose configuration for a single-instance deployment.
-- **docker-compose-multi.yaml**: Docker Compose configuration for multi-instance deployment.
+- **docker-compose.yaml**: Docker Compose configuration for deployment.
 - **powerdns/recursor.conf**: Configuration file for PowerDNS Recursor.
 
 ## Usage
@@ -16,14 +15,9 @@ These are the files required to run PowerDNS Recursor in a Docker container. It 
 docker build -t local/pdns-recursor .
 ```
 
-### Run a Single Instance
+### Run Instance
 ```sh
-docker-compose -f docker-compose-single.yaml up -d
-```
-
-### Run Multiple Instances
-```sh
-docker-compose -f docker-compose-multi.yaml up -d
+docker-compose -f docker-compose.yaml up -d
 ```
 
 ## Configuration
