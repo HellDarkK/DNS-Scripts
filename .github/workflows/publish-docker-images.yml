@@ -12,7 +12,7 @@ on:
     branches: [ "main" ]
 env:
   REGISTRY: ghcr.io
-  REPO: ${{ github.repository }} | tr '[:upper:]' '[:lower:]'
+  REPO: ${{ github.repository | toLower }}
 jobs:
   powerdns-recursor:
     runs-on: ubuntu-latest
