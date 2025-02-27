@@ -12,7 +12,7 @@ on:
     branches: [ "main" ]
 env:
   REGISTRY: ghcr.io
-  REPO: ${{ github.repository }}
+  REPO: ${{ github.repository }} | tr '[:upper:]' '[:lower:]'
 jobs:
   powerdns-recursor:
     runs-on: ubuntu-latest
@@ -80,7 +80,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: Dockerized-DNS-Server/dnsdist
-          file: Dockerized-DNS-Server/DNSdist/Dockerfile
+          file: Dockerized-DNS-Server/dnsdist/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.REGISTRY }}/${{ env.REPO }}/dnsdist:latest
           cache-from: type=gha
