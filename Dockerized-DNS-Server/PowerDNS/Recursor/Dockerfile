@@ -7,21 +7,21 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean
 
 # Create the APT source list for PowerDNS
-RUN echo 'deb [signed-by=/etc/apt/keyrings/auth-49-pub.asc] http://repo.powerdns.com/debian bookworm-auth-49 main' | tee /etc/apt/sources.list.d/pdns.list
+RUN echo 'deb [signed-by=/etc/apt/keyrings/rec-master-pub.asc] http://repo.powerdns.com/debian bookworm-rec-master main' | tee /etc/apt/sources.list.d/pdns.list
 
 # Create the APT preferences file
-RUN echo "Package: auth*" > /etc/apt/preferences.d/auth-49 && \
-    echo "Pin: origin repo.powerdns.com" >> /etc/apt/preferences.d/auth-49 && \
-    echo "Pin-Priority: 600" >> /etc/apt/preferences.d/auth-49
+RUN echo "Package: rec*" > /etc/apt/preferences.d/rec-master && \
+    echo "Pin: origin repo.powerdns.com" >> /etc/apt/preferences.d/rec-master && \
+    echo "Pin-Priority: 600" >> /etc/apt/preferences.d/rec-master
 
 # Add APT Keyring file
-RUN install -d /etc/apt/keyrings && curl https://repo.powerdns.com/FD380FBB-pub.asc | sudo tee /etc/apt/keyrings/auth-49-pub.asc
+RUN install -d /etc/apt/keyrings && curl https://repo.powerdns.com/FD380FBB-pub.asc | sudo tee /etc/apt/keyrings/rec-master-pub.asc
 
 # Install PowerDNS Authoritative Server
-RUN apt-get update && apt-get install -y pdns-server
+RUN apt-get update && apt-get install -y pdns-recursor
 
 # Expose PowerDNS Ports (53 for DNS)
 EXPOSE 53/tcp 53/udp
 
 # Correct EntryPoint for PowerDNS Authoritative Server
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/sbin/pdns_server", "--daemon=no", "--guardian=no", "--loglevel=9"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/sbin/pdns-recursor", "--daemon=no", "--guardian=no", "--loglevel=9"]
