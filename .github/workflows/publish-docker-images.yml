@@ -12,7 +12,7 @@ on:
     branches: [ "main" ]
 env:
   REGISTRY: ghcr.io
-  REPO: ${{ github.repository | toLower }}
+  REPO: ${{ github.repository }}
 jobs:
   powerdns-recursor:
     runs-on: ubuntu-latest
@@ -28,6 +28,10 @@ jobs:
         uses: sigstore/cosign-installer@v3
         with:
           cosign-release: 'v2.2.4'
+
+      - name: Convert repository name to lowercase
+        run: echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
+        
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Log into registry
@@ -67,6 +71,11 @@ jobs:
         uses: sigstore/cosign-installer@v3
         with:
           cosign-release: 'v2.2.4'
+
+
+      - name: Convert repository name to lowercase
+        run: echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
+        
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Log into registry
