@@ -6,6 +6,9 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y sudo curl python3 python3-jinja2 tini libcap2-bin && \
     apt-get clean
 
+# Create PowerDNS Recursor Socket Directory
+RUN mkdir /var/run/pdns-recursor
+
 # Create the APT source list for PowerDNS
 RUN echo 'deb [signed-by=/etc/apt/keyrings/rec-master-pub.asc] http://repo.powerdns.com/debian bookworm-rec-master main' | tee /etc/apt/sources.list.d/pdns.list
 
