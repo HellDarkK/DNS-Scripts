@@ -24,4 +24,4 @@ RUN apt-get update && apt-get install -y pdns-recursor
 EXPOSE 53/tcp 53/udp
 
 # Correct EntryPoint for PowerDNS Recursor
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/sbin/pdns-recursor", "--daemon=no", "--write-pid=no", "--disable-syslog", "--log-timestamp=no"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/sbin/pdns_recursor", "--daemon=no", "--write-pid=no", "--disable-syslog", "--log-timestamp=no"]
