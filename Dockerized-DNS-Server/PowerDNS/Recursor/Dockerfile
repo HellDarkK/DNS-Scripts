@@ -23,5 +23,5 @@ RUN apt-get update && apt-get install -y pdns-recursor
 # Expose PowerDNS Ports (53 for DNS)
 EXPOSE 53/tcp 53/udp
 
-# Correct EntryPoint for PowerDNS Authoritative Server
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/sbin/pdns-recursor", "--daemon=no", "--guardian=no", "--loglevel=9"]
+# Correct EntryPoint for PowerDNS Recursor
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/sbin/pdns-recursor", "--daemon=no", "--write-pid=no", "--disable-syslog", "--log-timestamp=no"]
